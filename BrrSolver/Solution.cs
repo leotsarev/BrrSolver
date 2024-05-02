@@ -34,13 +34,28 @@ public class Solution
         return string.Join("", Digits.Select(d => d.ToString()));
     }
 
-    internal static HashSet<Solution> GenerateSet()
+    public CheckResult CompareWithCandidate(Solution candidate)
     {
-        var set = new HashSet<Solution>();
-        for (int i = 0; i < 10000; i++)
+        var posErrors = 0;
+        var chiperError = 0;
+        for (int i = 0; i < 4; i++)
         {
-            set.Add(new Solution(i));
+            var targetInt = this.Digits[i];
+            var candidateInt = candidate.Digits[i];
+            if (ContainsDigit(candidateInt))
+            {
+                if (targetInt != candidateInt)
+                {
+                    posErrors++;
+                }
+
+            }
+            else
+            {
+                chiperError++;
+            }
         }
-        return set;
+
+        return new CheckResult(chiperError, posErrors);
     }
 }

@@ -3,17 +3,19 @@ using BrrSolver;
 
 Console.WriteLine("Hello, World!");
 
-HashSet<Solution> solutions = Solution.GenerateSet();
+var solutions = new SolutionSet();
 Console.WriteLine(solutions.Count);
+
+var solver = new MaxDistinctDigitsSolver();
 
 while (true)
 {
-    Solution candidate = Solver.SelectSolution(solutions);
+    Solution candidate = solver.SelectCandidate(solutions);
 
 
     var checkResult = ReadResultFromConsole(candidate);
 
-    solutions = Solver.NarrowSolutionWith(solutions, candidate, checkResult);
+    solutions = solutions.NarrowSolutionWith(candidate, checkResult);
     if (solutions.Count == 1)
     {
         WriteSolution(solutions.Single());
