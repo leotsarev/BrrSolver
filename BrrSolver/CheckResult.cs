@@ -1,6 +1,4 @@
-﻿
-
-namespace BrrSolver;
+﻿namespace BrrSolver;
 
 public record class CheckResult(int ErrorChiper, int ErrorPosition)
 {
@@ -25,7 +23,9 @@ public record class CheckResult(int ErrorChiper, int ErrorPosition)
 
     internal static CheckResult? FromString(string res)
     {
-        var parts = res.Trim().Split(' ');
+        res = res.Trim();
+        var parts = res.Length == 2 ? [res[0].ToString(), res[1].ToString()] : res.Split(' ');
+
         if (parts.Length != 2)
         {
             return null;
